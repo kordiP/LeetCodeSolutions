@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine(RomanToInt(Console.ReadLine()));
         }
         public static int[] TwoSum(int[] nums, int target)
         {
@@ -21,7 +21,7 @@
             return [0, 0];
         }
 
-        public int FindMaxK(int[] nums)
+        public static int FindMaxK(int[] nums)
         {
             int largestNumber = -1;
             foreach (var number in nums)
@@ -50,7 +50,7 @@
             return result;
         }
 
-        public int ClimbStairs(int n)
+        public static int ClimbStairs(int n)
         {
             int a = 2, b = 3, temp;
 
@@ -65,7 +65,7 @@
             return a;
         }
 
-        public int ArrangeCoins()
+        public static int ArrangeCoins()
         {
             int n = 4;
             int counter = 0;
@@ -74,5 +74,40 @@
 
             return n < 0 ? --counter : counter;
         }
+
+        public static int RomanToInt(string s)
+        {
+            int sum = 0;
+            Dictionary<char, int> romanValues = new()
+            {
+                { 'I', 1 },
+                { 'V', 5 },
+                { 'X', 10 },
+                { 'L', 50 },
+                { 'C', 100 },
+                { 'D', 500 },
+                { 'M', 1000 }
+            };
+
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                int current = romanValues[s[i]];
+                int next = romanValues[s[i + 1]];
+
+                if (current < next)
+                {
+                    sum -= current;
+                }
+                else
+                {
+                    sum += current;
+                }
+            }
+            sum += romanValues[s[s.Length - 1]];
+
+            return sum;
+        }
+
+
     }
 }
